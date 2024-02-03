@@ -1,0 +1,26 @@
+class Solution(object):
+    def productExceptSelf(self, nums):
+        n = len(nums)
+        
+        # Initialize arrays to store the products of prefixes and suffixes
+        prefix_products = [1] * n
+        suffix_products = [1] * n
+        result = [1] * n
+
+        # Calculate the products of prefixes
+        prefix_product = 1
+        for i in range(n):
+            prefix_products[i] = prefix_product
+            prefix_product *= nums[i]
+
+        # Calculate the products of suffixes
+        suffix_product = 1
+        for i in range(n - 1, -1, -1):
+            suffix_products[i] = suffix_product
+            suffix_product *= nums[i]
+
+        # Multiply the corresponding prefix and suffix products to get the result
+        for i in range(n):
+            result[i] = prefix_products[i] * suffix_products[i]
+
+        return result
